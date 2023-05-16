@@ -74,5 +74,28 @@ namespace Calculator.Core.Processor
 
         }
 
+        [Theory]
+        [InlineData(0.5, 0.5, 0.25)]
+        [InlineData(0.3, 0.7, 0.21)]
+        public void ShouldSaveEitherResultToFile(double p1, double p2, double expected)
+        {
+
+            Probability savedProbability = null;
+
+            _probabilityRepositoryMock.Setup(x => x.Save(It.IsAny<Probability>()))
+                .Callback<Probability>(probabilty =>
+                {
+                    savedProbability = probabilty;
+                });
+
+            _processor.Either(p1, p2);
+
+            _probabilityRepositoryMock.Verify(x => x.Save(It.IsAny<Probability>()), Times.Once());
+
+            Assert.NotNull(savedProbability);
+            Assert.Equal(expected, savedProbability.Value);
+
+        }
+
     }
 }
