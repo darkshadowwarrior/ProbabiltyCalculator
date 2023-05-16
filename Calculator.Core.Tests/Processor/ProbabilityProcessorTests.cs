@@ -19,6 +19,9 @@
         [InlineData(1, -0.5)]
         public void ShouldThrowsArgumentOutOfRangeExceptionIfArgumentIsNullWhenCallingCombinedWith(double p1, double p2)
         {
-            
+            var processor = new ProbabilityProcessor();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => processor.CombinedWith(p1, p2));
         }
+    }
 }
