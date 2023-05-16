@@ -1,13 +1,20 @@
+using Calculator.Core.Data;
+using Calculator.Core.Processor;
+using Calculator.Core.Repository;
+using Calculator.Core.Wrappers;
 using Calculator.UI.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using Calculator.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<IFileWriter, FileWriter>();
+builder.Services.AddSingleton<IProbabilityRepository, ProbabilityRepository>();
+builder.Services.AddSingleton<IProbabilityProcessor, ProbabilityProcessor>();
+builder.Services.AddSingleton<ProbabilityCalculationController>();
+builder.Services.AddSingleton<IProbabilityCalculationService, ProbabilityCalculationService>();
 
 var app = builder.Build();
 
