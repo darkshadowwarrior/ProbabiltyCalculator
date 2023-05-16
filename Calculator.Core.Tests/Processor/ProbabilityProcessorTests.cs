@@ -28,5 +28,14 @@ namespace Calculator.Core.Processor
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => _processor.CombinedWith(p1, p2));
         }
+
+        [Theory]
+        [InlineData(0.5, 0.5, 0.75)]
+        public void ShouldReturnCorrectProbability_WhenEitherIsCalled(double p1, double p2, double expected)
+        {
+            var result = _processor.Either(p1, p2);
+
+            Assert.Equal(expected, result);
+        }
     }
 }

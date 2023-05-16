@@ -20,5 +20,10 @@
                 throw new ArgumentOutOfRangeException();
             }
         }
+
+        internal object Either(double p1, double p2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
