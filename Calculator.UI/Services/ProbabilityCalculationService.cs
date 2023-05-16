@@ -19,7 +19,8 @@ namespace Calculator.UI.Services
 
             if (probabilityCalculationRequest.TypeOfCalculation.Equals("CombinedWith")) { 
                 response.Result = _processor.CombinedWith(p1, p2);
-            } else
+            } 
+            else
             {
                 response.Result = _processor.Either(p1, p2);
             }
