@@ -2,7 +2,7 @@
 
 namespace Calculator.Core.Processor
 {
-    public class ProbabilityProcessor
+    public class ProbabilityProcessor : IProbabilityProcessor
     {
         private readonly IProbabilityRepository _repository;
 

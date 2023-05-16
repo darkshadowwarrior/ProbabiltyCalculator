@@ -1,14 +1,24 @@
-﻿namespace Calculator.UI.Services
+﻿using Calculator.Core.Processor;
+
+namespace Calculator.UI.Services
 {
     public class ProbabilityCalculationService
     {
-        public ProbabilityCalculationService()
+        private readonly IProbabilityProcessor _processor;
+
+        public ProbabilityCalculationService(IProbabilityProcessor processor)
         {
+            _processor = processor;
         }
 
         public ProbabilityCalculationResponse Calculate(ProbabilityCalculationRequest probabilityCalculationRequest)
         {
-            throw new NotImplementedException();
+            var response = new ProbabilityCalculationResponse();
+            if (probabilityCalculationRequest.TypeOfCalculation.Equals("CombinedWith")) { 
+                response.Result = _processor.CombinedWith(probabilityCalculationRequest.ProbabilityA, probabilityCalculationRequest.ProbabilityB);
+            }
+
+            return response;
         }
     }
 }
