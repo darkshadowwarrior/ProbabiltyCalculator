@@ -12,7 +12,7 @@ namespace Calculator.Core.Processor
         {
             _probabilityRepositoryMock = new Mock<IProbabilityRepository>();
 
-            _processor = new ProbabilityProcessor();
+            _processor = new ProbabilityProcessor(_probabilityRepositoryMock.Object);
         }
 
         [Theory]

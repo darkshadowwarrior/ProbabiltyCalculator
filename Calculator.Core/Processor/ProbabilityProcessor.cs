@@ -2,16 +2,22 @@
 {
     public class ProbabilityProcessor
     {
-        public ProbabilityProcessor()
-        {
+        private readonly IProbabilityRepository _repository;
 
+        public ProbabilityProcessor(IProbabilityRepository repository)
+        {
+            _repository = repository;
         }
 
         public double CombinedWith(double p1, double p2)
         {
             ThrowExceptionIfArguementsOutOfRange(p1, p2);
 
-            return p1 * p2;
+            var result = p1 * p2;
+
+            _repository.Save(new Probability { Value = result });
+
+            return result;
         }
 
         public double Either(double p1, double p2)
