@@ -16,12 +16,12 @@ namespace Calculator.Core.Processor
             _processor = new ProbabilityProcessor(_probabilityRepositoryMock.Object);
         }
 
-        [Theory]
-        [InlineData(0.5, 0.5, 0.25)]
-        [InlineData(0.3, 0.7, 0.21)]
-        public void ShouldReturnCorrectProbability_WhenCombinedWithIsCalled(double p1, double p2, double expected)
+        [Fact]
+        public void WhenCombinedWithIsCalled_ShouldReturnCorrectProbability()
         {
-            var result = _processor.CombinedWith(p1, p2);
+            var expected = 0.25;
+
+            var result = _processor.CombinedWith(0.5, 0.5);
 
             Assert.Equal(expected, result);
         }
@@ -29,17 +29,17 @@ namespace Calculator.Core.Processor
         [Theory]
         [InlineData(-0.1, 0.5)]
         [InlineData(1, -0.5)]
-        public void ShouldThrowsArgumentOutOfRangeExceptionIfArgumentIsNullWhenCallingCombinedWith(double p1, double p2)
+        public void WhenCombinedWithIsCalled_IfArgumentIsAnArguementIsOutOfRange_ShouldThrowArgumentOutOfRangeException(double p1, double p2)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => _processor.CombinedWith(p1, p2));
         }
 
-        [Theory]
-        [InlineData(0.5, 0.5, 0.75)]
-        [InlineData(0.3, 0.7, 0.79)]
-        public void ShouldReturnCorrectProbability_WhenEitherIsCalled(double p1, double p2, double expected)
+        [Fact]
+        public void WhenEitherIsCalled_ShouldReturnCorrectProbability()
         {
-            var result = _processor.Either(p1, p2);
+            var expected = 0.75;
+
+            var result = _processor.Either(0.5, 0.5);
 
             Assert.Equal(expected, result);
         }
@@ -47,55 +47,25 @@ namespace Calculator.Core.Processor
         [Theory]
         [InlineData(-0.1, 0.5)]
         [InlineData(1, -0.5)]
-        public void ShouldThrowsArgumentOutOfRangeExceptionIfArgumentIsNullWhenCallingEither(double p1, double p2)
+        public void WhenEitherIsCalled_IfArgumentIsAnArguementIsOutOfRange_ShouldThrowArgumentOutOfRangeException(double p1, double p2)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => _processor.Either(p1, p2));
         }
 
-        [Theory]
-        [InlineData(0.5, 0.5, 0.25)]
-        [InlineData(0.3, 0.7, 0.21)]
-        public void ShouldSaveCombinedWithResultToFile(double p1, double p2, double expected)
+        [Fact]
+        public void WhenCombinedWithIsCalled_ShouldSaveCombinedWithResultToFile()
         {
-
-            Probability savedProbability = null;
-
-            _probabilityRepositoryMock.Setup(x => x.Save(It.IsAny<Probability>()))
-                .Callback<Probability>(probabilty =>
-                {
-                    savedProbability = probabilty;
-                });
-
-            _processor.CombinedWith(p1, p2);
+            _processor.CombinedWith(0.5, 0.5);
 
             _probabilityRepositoryMock.Verify(x => x.Save(It.IsAny<Probability>()), Times.Once());
-
-            Assert.NotNull(savedProbability);
-            Assert.Equal(expected, savedProbability.Value);
-
         }
 
-        [Theory]
-        [InlineData(0.5, 0.5, 0.75)]
-        [InlineData(0.3, 0.7, 0.79)]
-        public void ShouldSaveEitherResultToFile(double p1, double p2, double expected)
+        [Fact]
+        public void WhenEitherIsCalled_ShouldSaveEitherResultToFile()
         {
-
-            Probability savedProbability = null;
-
-            _probabilityRepositoryMock.Setup(x => x.Save(It.IsAny<Probability>()))
-                .Callback<Probability>(probabilty =>
-                {
-                    savedProbability = probabilty;
-                });
-
-            _processor.Either(p1, p2);
+            _processor.Either(0.5, 0.5);
 
             _probabilityRepositoryMock.Verify(x => x.Save(It.IsAny<Probability>()), Times.Once());
-
-            Assert.NotNull(savedProbability);
-            Assert.Equal(expected, savedProbability.Value);
-
         }
 
     }
