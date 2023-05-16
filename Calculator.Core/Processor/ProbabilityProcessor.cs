@@ -4,6 +4,7 @@
     {
         public ProbabilityProcessor()
         {
+
         }
 
         public double CombinedWith(double p1, double p2)

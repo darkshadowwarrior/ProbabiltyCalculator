@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Calculator.Core.Processor
+﻿namespace Calculator.Core.Processor
 {
     public class ProbabilityProcessorTests
     {
