@@ -31,7 +31,7 @@ namespace Calculator.Core.Processor
 
             var result = a - b;
 
-            _repository.Save(new Probability { Value = result });
+            _repository.Save(new Probability { Value = result, Inputs = new double[] { p1, p2 }, TypeOfCalculation = "Either", Date = DateTime.Now });
 
             return result;
         }
