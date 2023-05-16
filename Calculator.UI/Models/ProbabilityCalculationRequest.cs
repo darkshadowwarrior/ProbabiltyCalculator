@@ -2,8 +2,8 @@
 {
     public class ProbabilityCalculationRequest
     {
-        public double ProbabilityA { get; set; }
-        public double ProbabilityB { get; set; }
+        public string ProbabilityA { get; set; }
+        public string ProbabilityB { get; set; }
         public string TypeOfCalculation { get; set; }
     }
 }

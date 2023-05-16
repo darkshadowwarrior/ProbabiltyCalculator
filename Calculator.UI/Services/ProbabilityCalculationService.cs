@@ -2,7 +2,7 @@
 
 namespace Calculator.UI.Services
 {
-    public class ProbabilityCalculationService
+    public class ProbabilityCalculationService : IProbabilityCalculationService
     {
         private readonly IProbabilityProcessor _processor;
 
@@ -14,11 +14,14 @@ namespace Calculator.UI.Services
         public ProbabilityCalculationResponse Calculate(ProbabilityCalculationRequest probabilityCalculationRequest)
         {
             var response = new ProbabilityCalculationResponse();
+            var p1 = double.Parse(probabilityCalculationRequest.ProbabilityA);
+            var p2 = double.Parse(probabilityCalculationRequest.ProbabilityB);
+
             if (probabilityCalculationRequest.TypeOfCalculation.Equals("CombinedWith")) { 
-                response.Result = _processor.CombinedWith(probabilityCalculationRequest.ProbabilityA, probabilityCalculationRequest.ProbabilityB);
+                response.Result = _processor.CombinedWith(p1, p2);
             } else
             {
-                response.Result = _processor.Either(probabilityCalculationRequest.ProbabilityA, probabilityCalculationRequest.ProbabilityB);
+                response.Result = _processor.Either(p1, p2);
             }
 
             return response;
