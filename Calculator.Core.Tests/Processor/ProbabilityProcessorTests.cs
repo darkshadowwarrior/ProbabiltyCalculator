@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
+﻿using Calculator.Core.Data;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
 using Moq;
 
 namespace Calculator.Core.Processor

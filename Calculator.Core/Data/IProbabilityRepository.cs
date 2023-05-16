@@ -1,4 +1,6 @@
-﻿namespace Calculator.Core.Processor
+﻿using Calculator.Core.Processor;
+
+namespace Calculator.Core.Data
 {
     public interface IProbabilityRepository
     {

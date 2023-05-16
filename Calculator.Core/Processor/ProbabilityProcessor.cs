@@ -1,4 +1,6 @@
-﻿namespace Calculator.Core.Processor
+﻿using Calculator.Core.Data;
+
+namespace Calculator.Core.Processor
 {
     public class ProbabilityProcessor
     {
