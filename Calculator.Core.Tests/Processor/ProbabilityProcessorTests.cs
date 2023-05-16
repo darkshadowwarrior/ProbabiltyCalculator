@@ -29,6 +29,7 @@
 
         [Theory]
         [InlineData(0.5, 0.5, 0.75)]
+        [InlineData(0.3, 0.7, 0.79)]
         public void ShouldReturnCorrectProbability_WhenEitherIsCalled(double p1, double p2, double expected)
         {
             var result = _processor.Either(p1, p2);
