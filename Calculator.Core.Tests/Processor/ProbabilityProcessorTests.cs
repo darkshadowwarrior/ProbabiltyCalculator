@@ -12,7 +12,13 @@
             var result = processor.CombinedWith(p1, p2);
 
             Assert.Equal(expected, result);
-
         }
-    }
+
+        [Theory]
+        [InlineData(-0.1, 0.5)]
+        [InlineData(1, -0.5)]
+        public void ShouldThrowsArgumentOutOfRangeExceptionIfArgumentIsNullWhenCallingCombinedWith(double p1, double p2)
+        {
+            
+        }
 }
