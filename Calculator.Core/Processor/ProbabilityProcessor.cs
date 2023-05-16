@@ -27,7 +27,11 @@
             var a = p1 + p2;
             var b = p2 * p1;
 
-            return a - b;
+            var result = a - b;
+
+            _repository.Save(new Probability { Value = result });
+
+            return result;
         }
 
         private static void ThrowExceptionIfArguementsOutOfRange(double p1, double p2)

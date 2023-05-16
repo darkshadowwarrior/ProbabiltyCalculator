@@ -75,8 +75,8 @@ namespace Calculator.Core.Processor
         }
 
         [Theory]
-        [InlineData(0.5, 0.5, 0.25)]
-        [InlineData(0.3, 0.7, 0.21)]
+        [InlineData(0.5, 0.5, 0.75)]
+        [InlineData(0.3, 0.7, 0.79)]
         public void ShouldSaveEitherResultToFile(double p1, double p2, double expected)
         {
 
