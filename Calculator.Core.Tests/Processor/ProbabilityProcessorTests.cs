@@ -37,5 +37,13 @@ namespace Calculator.Core.Processor
 
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData(-0.1, 0.5)]
+        [InlineData(1, -0.5)]
+        public void ShouldThrowsArgumentOutOfRangeExceptionIfArgumentIsNullWhenCallingEither(double p1, double p2)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => _processor.Either(p1, p2));
+        }
     }
 }
