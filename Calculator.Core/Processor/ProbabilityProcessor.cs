@@ -15,7 +15,7 @@
 
             var result = p1 * p2;
 
-            _repository.Save(new Probability { Value = result });
+            _repository.Save(new Probability { Value = result, Inputs = new double[] { p1, p2 }, TypeOfCalculation = "CombinedWith", Date = DateTime.Now });
 
             return result;
         }
