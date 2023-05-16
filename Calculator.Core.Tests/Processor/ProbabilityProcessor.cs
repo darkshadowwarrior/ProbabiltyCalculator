@@ -15,6 +15,8 @@
 
         public double Either(double p1, double p2)
         {
+            ThrowExceptionIfArguementsOutOfRange(p1, p2);
+
             var a = p1 + p2;
             var b = p2 * p1;
 
