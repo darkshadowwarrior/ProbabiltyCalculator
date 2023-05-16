@@ -16,6 +16,9 @@ namespace Calculator.UI.Services
             var response = new ProbabilityCalculationResponse();
             if (probabilityCalculationRequest.TypeOfCalculation.Equals("CombinedWith")) { 
                 response.Result = _processor.CombinedWith(probabilityCalculationRequest.ProbabilityA, probabilityCalculationRequest.ProbabilityB);
+            } else
+            {
+                response.Result = _processor.Either(probabilityCalculationRequest.ProbabilityA, probabilityCalculationRequest.ProbabilityB);
             }
 
             return response;
