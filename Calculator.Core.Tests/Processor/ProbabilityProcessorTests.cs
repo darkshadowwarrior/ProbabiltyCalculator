@@ -1,15 +1,22 @@
-﻿namespace Calculator.Core.Processor
+﻿using System.Diagnostics;
+
+namespace Calculator.Core.Processor
 {
     public class ProbabilityProcessorTests
     {
+        private ProbabilityProcessor _processor;
+
+        public ProbabilityProcessorTests()
+        {
+            _processor = new ProbabilityProcessor();
+        }
+
         [Theory]
         [InlineData(0.5, 0.5, 0.25)]
         [InlineData(0.3, 0.7, 0.21)]
         public void ShouldReturnCorrectProbability_WhenCombinedWithIsCalled(double p1, double p2, double expected)
         {
-            var processor = new ProbabilityProcessor();
-
-            var result = processor.CombinedWith(p1, p2);
+            var result = _processor.CombinedWith(p1, p2);
 
             Assert.Equal(expected, result);
         }
@@ -19,9 +26,7 @@
         [InlineData(1, -0.5)]
         public void ShouldThrowsArgumentOutOfRangeExceptionIfArgumentIsNullWhenCallingCombinedWith(double p1, double p2)
         {
-            var processor = new ProbabilityProcessor();
-
-            Assert.Throws<ArgumentOutOfRangeException>(() => processor.CombinedWith(p1, p2));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _processor.CombinedWith(p1, p2));
         }
     }
 }
