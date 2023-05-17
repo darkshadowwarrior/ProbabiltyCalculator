@@ -1,12 +1,13 @@
 ﻿using Calculator.Core.Data;
+using Calculator.Core.Domain;
 using Moq;
 
 namespace Calculator.Core.Processor
 {
     public class ProbabilityProcessorTests
     {
-        private Mock<IProbabilityRepository> _probabilityRepositoryMock;
-        private ProbabilityProcessor _processor;
+        private readonly Mock<IProbabilityRepository> _probabilityRepositoryMock;
+        private readonly ProbabilityProcessor _processor;
 
         public ProbabilityProcessorTests()
         {
@@ -18,7 +19,7 @@ namespace Calculator.Core.Processor
         [Theory]
         [InlineData(-0.1, 0.5)]
         [InlineData(1, -0.5)]
-        public void WhenCombinedWithIsCalled_IfArgumentIsAnArguementIsOutOfRange_ShouldThrowArgumentOutOfRangeException(double p1, double p2)
+        public void WhenCombinedWithIsCalled_IfArgumentIsOutOfRange_ShouldThrowArgumentOutOfRangeException(double p1, double p2)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => _processor.CombinedWith(p1, p2));
         }
@@ -26,13 +27,13 @@ namespace Calculator.Core.Processor
         [Theory]
         [InlineData(-0.1, 0.5)]
         [InlineData(1, -0.5)]
-        public void WhenEitherIsCalled_IfArgumentIsAnArguementIsOutOfRange_ShouldThrowArgumentOutOfRangeException(double p1, double p2)
+        public void WhenEitherIsCalled_IfArgumentIsOutOfRange_ShouldThrowArgumentOutOfRangeException(double p1, double p2)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => _processor.Either(p1, p2));
         }
 
         [Fact]
-        public void WhenCombinedWithIsCalledWithValidArguements_ShouldSaveCombinedWithResultToFile_AndShouldReturnExpectedProbability()
+        public void WhenCombinedWithIsCalledWithValidArguments_ShouldSaveCombinedWithResultToFile_AndShouldReturnExpectedProbability()
         {
             var expected = 0.25;
             var result = _processor.CombinedWith(0.5, 0.5);
@@ -43,7 +44,7 @@ namespace Calculator.Core.Processor
         }
 
         [Fact]
-        public void WhenEitherIsCalledWithValidArguements_ShouldSaveEitherResultToFile_AndShouldReturnExpectedProbability()
+        public void WhenEitherIsCalledWithValidArguments_ShouldSaveEitherResultToFile_AndShouldReturnExpectedProbability()
         {
             var expected = 0.75;
             var result = _processor.Either(0.5, 0.5);

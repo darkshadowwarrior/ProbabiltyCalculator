@@ -1,4 +1,4 @@
-﻿using Calculator.Core.Processor;
+﻿using Calculator.Core.Domain;
 
 namespace Calculator.Core.Data
 {

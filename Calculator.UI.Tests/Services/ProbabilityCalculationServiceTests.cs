@@ -1,11 +1,12 @@
 ﻿using Calculator.Core.Processor;
+using Calculator.UI.Models;
 using Moq;
 
 namespace Calculator.UI.Services
 {
     public class ProbabilityCalculationServiceTests
     {
-        private Mock<IProbabilityProcessor> _processorMock;
+        private readonly Mock<IProbabilityProcessor> _processorMock;
 
         public ProbabilityCalculationServiceTests()
         {

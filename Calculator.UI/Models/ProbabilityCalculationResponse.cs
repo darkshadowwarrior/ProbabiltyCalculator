@@ -1,4 +1,4 @@
-﻿namespace Calculator.UI.Services
+﻿namespace Calculator.UI.Models
 {
     public class ProbabilityCalculationResponse
     {

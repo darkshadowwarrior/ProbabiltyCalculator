@@ -1,12 +1,11 @@
-﻿using Calculator.Core.Data;
-using Calculator.Core.Processor;
+﻿using Calculator.Core.Domain;
 using Calculator.Core.Wrappers;
 
-namespace Calculator.Core.Repository
+namespace Calculator.Core.Data
 {
     public class ProbabilityRepository : IProbabilityRepository
     {
-        private IFileWriter _fileWriter;
+        private readonly IFileWriter _fileWriter;
 
         public ProbabilityRepository(IFileWriter fileWriter)
         {
@@ -15,9 +14,12 @@ namespace Calculator.Core.Repository
 
         public void Save(Probability probability)
         {
-            var line = $"{probability.Date}, {probability.TypeOfCalculation}, {probability.Value}, {probability.Inputs[0]}, {probability.Inputs[1]}";
+            if (probability.Inputs != null)
+            {
+                var line = $"{probability.Date}, {probability.TypeOfCalculation}, {probability.Value}, {probability.Inputs[0]}, {probability.Inputs[1]}";
 
-            _fileWriter.SaveToFile(line);
+                _fileWriter.SaveToFile(line);
+            }
         }
     }
 }

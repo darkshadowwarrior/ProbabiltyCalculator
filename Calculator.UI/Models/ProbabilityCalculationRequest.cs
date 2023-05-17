@@ -1,9 +1,9 @@
-﻿namespace Calculator.UI.Services
+﻿namespace Calculator.UI.Models
 {
     public class ProbabilityCalculationRequest
     {
-        public string ProbabilityA { get; set; }
-        public string ProbabilityB { get; set; }
-        public string TypeOfCalculation { get; set; }
+        public string? ProbabilityA { get; set; }
+        public string? ProbabilityB { get; set; }
+        public string? TypeOfCalculation { get; set; }
     }
 }

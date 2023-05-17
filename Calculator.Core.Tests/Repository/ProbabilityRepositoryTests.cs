@@ -1,4 +1,5 @@
-﻿using Calculator.Core.Processor;
+﻿using Calculator.Core.Data;
+using Calculator.Core.Domain;
 using Calculator.Core.Wrappers;
 using Moq;
 
@@ -6,7 +7,7 @@ namespace Calculator.Core.Repository
 {
     public class ProbabilityRepositoryTests
     {
-        private Mock<IFileWriter> _fileMock;
+        private readonly Mock<IFileWriter> _fileMock;
 
         public ProbabilityRepositoryTests()
         {
@@ -18,7 +19,7 @@ namespace Calculator.Core.Repository
         {
             var repository = new ProbabilityRepository(_fileMock.Object);
 
-            var probabilityToSave = new Probability { Value = 0.25, Date = new DateTime(2023, 5, 16), TypeOfCalculation = "CombinedWith", Inputs = new double[] { 0.5, 0.5 } };
+            var probabilityToSave = new Probability { Value = 0.25, Date = new DateTime(2023, 5, 16), TypeOfCalculation = "CombinedWith", Inputs = new[] { 0.5, 0.5 } };
             var expectedLineToSave = $"{probabilityToSave.Date}, {probabilityToSave.TypeOfCalculation}, {probabilityToSave.Value}, {probabilityToSave.Inputs[0]}, {probabilityToSave.Inputs[1]}";
 
             repository.Save(probabilityToSave);

@@ -1,10 +1,11 @@
+using Calculator.UI.Models;
 using Calculator.UI.Services;
 
-namespace Calculator.UI.Data
+namespace Calculator.UI.Controllers
 {
     public class ProbabilityCalculationController
     {
-        private IProbabilityCalculationService _service;
+        private readonly IProbabilityCalculationService _service;
 
         public ProbabilityCalculationController(IProbabilityCalculationService service)
         {
