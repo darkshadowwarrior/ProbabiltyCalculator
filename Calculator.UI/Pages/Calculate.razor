@@ -8,7 +8,8 @@
 
 <h1>Calculate</h1>
 
-<EditForm Model=@_request OnValidSubmit=@HandleValidSubmit OnInvalidSubmit=@HandleInvalidSubmit>
+<p>Please enter two probabilities to calculate between the ranges of 0 and 1. Then select the type of calculation you require and click Calculate</p>
+<EditForm Model=@_request OnValidSubmit=@HandleValidSubmit>
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="form-group">
@@ -35,7 +36,7 @@
         }
     </InputSelect>
     <br/>
-    <input type="submit" class="btn btn-primary" value="Save"/>
+    <input type="submit" class="btn btn-primary" value="Calculate"/>
 </EditForm>
 <br />
 <p role="status">Probability Result: @_response.Result</p>
@@ -53,10 +54,5 @@
             _response = ProbabilityCalculationController.CalculateProbability(_request);
             _request = new ProbabilityCalculationRequest();
         }
-    }
-
-    void HandleInvalidSubmit(EditContext editContext)
-    {
-
     }
 }
