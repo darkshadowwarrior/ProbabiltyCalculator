@@ -6,7 +6,7 @@ Licence MIT
 
 A program that takes two inputs and calculates the probability factor based on the calculation selected.
 
-The output log can be found within the Calculate.UI root folder and is called probability_results.csv. This file is generated on the first calculation request and is updated per requst made.
+The output log can be found within the Calculate.UI root folder and is called `probability_results.csv`. This file is generated on the first calculation request and is updated per requst made.
 
 The project is written in C# .Net 6 and requires the .Net 6 SDK/Runtime environment to be installed. You can run this project in either Visual Stuido IDE or smiilar product.
 
