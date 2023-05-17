@@ -1,8 +1,7 @@
 using Calculator.Core.Data;
 using Calculator.Core.Processor;
-using Calculator.Core.Repository;
 using Calculator.Core.Wrappers;
-using Calculator.UI.Data;
+using Calculator.UI.Controllers;
 using Calculator.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
