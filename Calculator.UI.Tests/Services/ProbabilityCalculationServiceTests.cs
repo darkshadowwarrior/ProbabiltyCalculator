@@ -19,7 +19,7 @@ namespace Calculator.UI.Services
             var service = new ProbabilityCalculationService(_processorMock.Object);
             _processorMock.Setup(x => x.CombinedWith(It.IsAny<double>(), It.IsAny<double>())).Returns(0.25);
 
-            ProbabilityCalculationResponse response = service.Calculate(new ProbabilityCalculationRequest { ProbabilityA = "0.5", ProbabilityB = "0.5", TypeOfCalculation = "CombinedWith" });
+            ProbabilityCalculationResponse response = service.Calculate(new ProbabilityCalculationRequest { ProbabilityA = 0.5, ProbabilityB = 0.5, TypeOfCalculation = "CombinedWith" });
 
             _processorMock.Verify(x => x.CombinedWith(It.IsAny<double>(), It.IsAny<double>()));
 
@@ -32,7 +32,7 @@ namespace Calculator.UI.Services
             var service = new ProbabilityCalculationService(_processorMock.Object);
             _processorMock.Setup(x => x.Either(It.IsAny<double>(), It.IsAny<double>())).Returns(0.75);
 
-            ProbabilityCalculationResponse response = service.Calculate(new ProbabilityCalculationRequest { ProbabilityA = "0.5", ProbabilityB = "0.5", TypeOfCalculation = "Either" });
+            ProbabilityCalculationResponse response = service.Calculate(new ProbabilityCalculationRequest { ProbabilityA = 0.5, ProbabilityB = 0.5, TypeOfCalculation = "Either" });
 
             _processorMock.Verify(x => x.Either(It.IsAny<double>(), It.IsAny<double>()));
 

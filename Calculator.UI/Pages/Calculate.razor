@@ -8,40 +8,55 @@
 
 <h1>Calculate</h1>
 
-<EditForm Model=@_request OnValidSubmit=@ValidFormSubmitted>
+<EditForm Model=@_request OnValidSubmit=@HandleValidSubmit OnInvalidSubmit=@HandleInvalidSubmit>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
     <div class="form-group">
         <label for="ProbabilityA">Probability A</label>
-        <InputText @bind-Value=_request.ProbabilityA class="form-control" id="ProbabilityA" />
+        <InputNumber @bind-Value=_request.ProbabilityA class="form-control" id="ProbabilityA" />
+        <ValidationMessage For="@(() => _request.ProbabilityA)"></ValidationMessage>
     </div>
-    <br />
+    <br/>
     <div class="form-group">
         <label for="ProbabilityB">Probability B</label>
-        <InputText @bind-Value=_request.ProbabilityB class="form-control" id="ProbabilityB" />
+        <InputNumber @bind-Value=_request.ProbabilityB class="form-control" id="ProbabilityB" />
+        <ValidationMessage For="@(() => _request.ProbabilityB)"></ValidationMessage>
     </div>
-    <br />
-    <select class="form-control selectpicker" @bind="_request.TypeOfCalculation">
-        <option>Select Calculation</option>
+    <br/>
+
+    <label for="TypeOfCalculation">Type Of Calculation</label>
+    <InputSelect class="form-control selectpicker" @bind-Value="@_request.TypeOfCalculation" id="TypeOfCalculation">
+        <ValidationMessage For="@(() => _request.TypeOfCalculation)"></ValidationMessage>
+        <option value="Select Calculation">Select Calculation</option>
         @foreach (var item in _calculations)
         {
             <option value="@item">@item</option>
             // Blazor needs to know what values it binds to!
         }
-    </select>
-    <br />
-    <input type="submit" class="btn btn-primary" value="Save" />
+    </InputSelect>
+    <br/>
+    <input type="submit" class="btn btn-primary" value="Save"/>
 </EditForm>
 <br />
 <p role="status">Probability Result: @_response.Result</p>
 
 @code {
-    readonly string[] _calculations = new string[] { "CombinedWith", "Either" };
+    private readonly string[] _calculations = new string[] { "CombinedWith", "Either" };
 
-    ProbabilityCalculationRequest _request = new();
-    ProbabilityCalculationResponse _response = new() { Result = -1 };
+    private ProbabilityCalculationRequest _request = new();
+    private ProbabilityCalculationResponse _response = new() { Result = -1 };
 
-    void ValidFormSubmitted(EditContext editContext)
+    void HandleValidSubmit(EditContext editContext)
     {
-        _response = ProbabilityCalculationController.CalculateProbability(_request);
-        _request = new ProbabilityCalculationRequest();
+        if (editContext.Validate())
+        {
+            _response = ProbabilityCalculationController.CalculateProbability(_request);
+            _request = new ProbabilityCalculationRequest();
+        }
+    }
+
+    void HandleInvalidSubmit(EditContext editContext)
+    {
+
     }
 }

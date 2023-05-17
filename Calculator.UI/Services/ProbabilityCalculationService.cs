@@ -15,8 +15,8 @@ namespace Calculator.UI.Services
         public ProbabilityCalculationResponse Calculate(ProbabilityCalculationRequest probabilityCalculationRequest)
         {
             var response = new ProbabilityCalculationResponse();
-            var p1 = double.Parse(probabilityCalculationRequest.ProbabilityA ?? string.Empty);
-            var p2 = double.Parse(probabilityCalculationRequest.ProbabilityB ?? string.Empty);
+            var p1 = probabilityCalculationRequest.ProbabilityA;
+            var p2 = probabilityCalculationRequest.ProbabilityB;
 
             response.Result = probabilityCalculationRequest.TypeOfCalculation is "CombinedWith" ? _processor.CombinedWith(p1, p2) : _processor.Either(p1, p2);
 
