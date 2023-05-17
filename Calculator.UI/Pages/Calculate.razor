@@ -1,6 +1,6 @@
 ﻿@page "/calculate"
-@using Calculator.UI.Data;
-@using Calculator.UI.Services;
+@using Calculator.UI.Controllers
+@using Calculator.UI.Models
 
 @inject ProbabilityCalculationController ProbabilityCalculationController
 
@@ -8,20 +8,20 @@
 
 <h1>Calculate</h1>
 
-<EditForm Model=@Request OnValidSubmit=@ValidFormSubmitted>
+<EditForm Model=@_request OnValidSubmit=@ValidFormSubmitted>
     <div class="form-group">
-        <label for="Name">Probability A</label>
-        <InputText @bind-Value=Request.ProbabilityA class="form-control" id="ProbabilityA" />
+        <label for="ProbabilityA">Probability A</label>
+        <InputText @bind-Value=_request.ProbabilityA class="form-control" id="ProbabilityA" />
     </div>
     <br />
     <div class="form-group">
-        <label for="Name">Probability B</label>
-        <InputText @bind-Value=Request.ProbabilityB class="form-control" id="ProbabilityB" />
+        <label for="ProbabilityB">Probability B</label>
+        <InputText @bind-Value=_request.ProbabilityB class="form-control" id="ProbabilityB" />
     </div>
     <br />
-    <select class="form-control selectpicker" @bind="Request.TypeOfCalculation">
+    <select class="form-control selectpicker" @bind="_request.TypeOfCalculation">
         <option>Select Calculation</option>
-        @foreach (var item in calculations)
+        @foreach (var item in _calculations)
         {
             <option value="@item">@item</option>
             // Blazor needs to know what values it binds to!
@@ -31,17 +31,17 @@
     <input type="submit" class="btn btn-primary" value="Save" />
 </EditForm>
 <br />
-<p role="status">Probability Result: @Response.Result</p>
+<p role="status">Probability Result: @_response.Result</p>
 
 @code {
-    string[] calculations = new string[] { "CombinedWith", "Either" };
+    readonly string[] _calculations = new string[] { "CombinedWith", "Either" };
 
-    ProbabilityCalculationRequest Request = new ProbabilityCalculationRequest();
-    ProbabilityCalculationResponse Response = new ProbabilityCalculationResponse() { Result = -1 };
+    ProbabilityCalculationRequest _request = new();
+    ProbabilityCalculationResponse _response = new() { Result = -1 };
 
     void ValidFormSubmitted(EditContext editContext)
     {
-        Response = ProbabilityCalculationController.CalculateProbability(Request);
-        Request = new ProbabilityCalculationRequest();
+        _response = ProbabilityCalculationController.CalculateProbability(_request);
+        _request = new ProbabilityCalculationRequest();
     }
 }
